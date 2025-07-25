@@ -1,27 +1,97 @@
-<h1>INTRADAY STOCK DATA</h1>
+<div class="m-0 p-0 min-h-screen bg-gray-50 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<%= form_with url: stocks_intraday_path, method: :get, local: true do |form| %>
-    <%= form.label :symbol, "Enter stock symbol (e.g., MSFT)" %>
-    <%= form.text_field :symbol, required: true %><br>
-    <%= form.submit "Search Stock" %>
-<% end %>
-
-<p><%= link_to 'Regenerate Stocks', stocks_intraday_path %></p>
-
-<% if @latest_open_value %>
-    <p><%= @stock_symbol %></p>
-    <p> Stock Price : <%= @latest_open_value %> </p> <br>
-    <%= form_with url: stocks_intraday_path, local: true do |f| %>
-        <div>
-            <%= f.label :quantity, "Quantity:" %>
-            <%= f.number_field :quantity, value: 0, min: 0 %>
-        </div>
-        <div>
-            <%= f.submit "Add Quantity", name: "action", value: "add" %>
-            <%= f.submit "Subtract Quantity", name: "action", value: "subtract" %>
-        </div>
-        <% if @quantity %>
-            <p>Total: <%= @latest_open_value * @quantity %></p>
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 mx-4 sm:mx-6 lg:mx-8 mt-4 sm:mt-6 lg:mt-8 p-6 sm:p-10 lg:p-12 bg-white bg-opacity-90 rounded-lg shadow border-2">
+      <div class="mb-4 md:mb-0">
+        <%= link_to portfolios_show_path, class: "inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200" do %>
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to My Profile
         <% end %>
-    <% end %>
-<% end %>
+
+        <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl mt-4 md:mt-2">Buy & Sell Stocks</h1>
+      </div>
+
+      <div class="text-left md:text-right">
+        <p class="text-sm text-gray-500 font-medium">Current Balance</p>
+        <p class="text-3xl font-bold text-green-600">$<%= current_user.balance %></p>
+      </div>
+    </div>
+
+    <!-- Stock Search + Details -->
+    <div class="flex flex-col lg:flex-row items-stretch justify-between gap-6 mx-4 sm:mx-6 lg:mx-8 mt-6 mb-8">
+
+      <!-- Search Stocks -->
+      <div class="w-full lg:w-1/2 bg-white rounded-lg shadow-md border-2">
+        <div class="p-6">
+          <p class="text-green-700 text-sm font-semibold mb-4 text-center">Search Stocks</p>
+          <%= form_with url: intraday_stocks_path, method: :get, local: true, class: "flex flex-col items-center gap-4" do |f| %>
+            <div class="w-full">
+              <%= f.label :symbol, "Stock Symbol", class: "block text-sm font-medium text-gray-700 text-center mb-1" %>
+              <%= f.text_field :symbol, value: params[:symbol], placeholder: "e.g., AAPL", class: "w-full py-3 px-4 rounded-lg font-semibold border border-gray-300 transition duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400" %>
+            </div>
+
+            <div class="flex flex-col gap-3 w-full">
+              <%= f.submit "Search", class: "w-full bg-blue-50 hover:bg-blue-200 text-blue-600 py-2 px-4 rounded-lg font-semibold transition duration-200 shadow-md", style: "cursor: pointer" %>
+              <%= link_to "Regenerate Stocks", intraday_stocks_path, class: "w-full bg-green-100 hover:bg-green-200 text-green-600 py-2 px-4 rounded-lg font-semibold transition duration-200 shadow-md text-center" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Stock Details -->
+      <% if @stock_symbol %>
+        <div class="w-full lg:w-1/2 bg-white rounded-lg shadow-md border-2">
+          <div class="p-6">
+            <div class="text-center mb-4">
+              <h3 class="text-lg font-semibold text-gray-900"><%= @stock_symbol.upcase %></h3>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 text-center">
+              <div>
+                <p class="text-xs text-gray-500 font-medium">Current Price</p>
+                <p class="text-lg font-bold text-blue-600">$<%= @latest_open_value %></p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-500 font-medium">Shares Owned</p>
+                <p class="text-lg font-bold text-gray-900"><%= @stock_shares %></p>
+              </div>
+              <div>
+                <p class="text-xs text-gray-500 font-medium">Total Investment</p>
+                <p class="text-lg font-bold text-green-600">$<%= @stock_total_amount %></p>
+              </div>
+            </div>
+
+            <!-- Trading Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+              <!-- Buy Shares -->
+              <%= form_with url: stocks_path, method: :post, local: true, class: "w-full sm:w-auto" do |f| %>
+                <%= f.hidden_field :symbol, value: @stock_symbol %>
+                <%= f.hidden_field :redirect_to, value: intraday_stocks_path(symbol: @stock_symbol) %>
+                <div class="flex flex-col items-center gap-2">
+                  <%= f.label :shares, "Shares to Buy", class: "text-sm font-medium text-gray-700" %>
+                  <%= f.number_field :shares, min: 1, placeholder: "Enter shares", class: "w-24 px-2 py-1 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500" %>
+                  <%= f.submit "Buy", class: "px-3 py-1 text-xs font-semibold rounded-full border bg-green-100 text-green-800 hover:bg-green-200 transition" %>
+                </div>
+              <% end %>
+
+              <!-- Sell Shares -->
+              <%= form_with url: update_stock_stocks_path, method: :put, local: true, class: "w-full sm:w-auto" do |f| %>
+                <%= f.hidden_field :symbol, value: @stock_symbol %>
+                <%= f.hidden_field :redirect_to, value: intraday_stocks_path(symbol: @stock_symbol) %>
+                <div class="flex flex-col items-center gap-2">
+                  <%= f.label :subtract_shares, "Shares to Sell", class: "text-sm font-medium text-gray-700" %>
+                  <%= f.number_field :subtract_shares, min: 1, placeholder: "Enter shares", class: "w-24 px-2 py-1 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500" %>
+                  <%= f.submit "Sell", class: "px-3 py-1 text-xs font-semibold rounded-full border bg-red-100 text-red-800 hover:bg-red-200 transition" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -1,7 +1,6 @@
 require "test_helper"
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+    Rails.logger.info "=== HOME CONTROLLER: index action called ==="
+    Rails.logger.info "=== Current user: #{current_user&.email} ==="
 end

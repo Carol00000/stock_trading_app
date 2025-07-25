@@ -61,3 +61,6 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 gem 'rails_live_reload', '~> 0.3.6'
 
 gem 'dotenv-rails', '~> 3.1', '>= 3.1.4'
+
+gem 'tailwindcss-rails'
+gem "tailwindcss-ruby", "~> 4.1"

@@ -1,12 +1,112 @@
-<h1>User Details</h1>
-<%=link_to "Back", admin_users_path %>
-<hr>
+<body class="min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md border-2 border-gray-400 rounded-md">
 
-<p>Email: <%= @user.email %></p>
-<p>First Name: <%= @user.first_name %></p>
-<p>Last Name: <%= @user.last_name %></p>
-<p>Balance: <%= @user.balance %></p>
-<%= link_to "Edit", edit_admin_user_path(@user) %>
-<%= link_to "Delete User", admin_user_path(@user), data: {
-                turbo_method: :delete, turbo_confirm: "Delete user?"
-                } %>
+    <!-- Back Button -->
+    <div class="mb-6">
+      <%= link_to admin_users_path, class: "inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200" do %>
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        Back to Users
+      <% end %>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-gray-800 text-center mb-8">User Details</h1>
+
+    <!-- User Details -->
+    <div class="space-y-6 mb-8">
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600 font-medium">Email:</span>
+        <span class="text-gray-800 font-semibold"><%= @user.email %></span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600 font-medium">First Name:</span>
+        <span class="text-gray-800 font-semibold"><%= @user.first_name %></span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600 font-medium">Last Name:</span>
+        <span class="text-gray-800 font-semibold"><%= @user.last_name %></span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600 font-medium">Balance:</span>
+        <span class="text-green-600 font-bold text-lg"><%= number_to_currency(@user.balance) %></span>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <span class="text-gray-600 font-medium">Account Status:</span>
+                      <span class="
+                        <%= @user.account_status == 'approved' ? 'bg-green-100 text-green-800' :
+                            @user.account_status == 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-red-100 text-red-800' %>">
+                        <%= @user.account_status.capitalize %>
+                      </span>
+      </div>
+    </div>
+
+    <!-- Approve/Deny -->
+    <% if @user.account_status.in?(%w[pending denied]) %>
+      <div class="bg-gray-50 p-6 rounded-xl mb-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">Account Status Actions</h3>
+
+        <!-- Centered row -->
+        <div class="flex justify-center">
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <!-- Approve -->
+            <%= button_to approve_admin_user_path(@user),
+                method: :patch,
+                data: { turbo_confirm: "Are you sure you want to approve this user?" },
+                class: "border bg-green-50 hover:bg-green-100 text-green-600 py-3 px-6 rounded-lg font-semibold transition duration-200 flex items-center justify-center shadow-md w-full sm:w-auto" do %>
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Approve User
+            <% end %>
+
+            <% if @user.account_status == 'pending' %>
+              <!-- Deny -->
+              <%= button_to deny_admin_user_path(@user),
+                  method: :patch,
+                  data: { turbo_confirm: "Are you sure you want to reject this user?" },
+                  class: "border bg-red-50 hover:bg-red-100 text-red-600 py-3 px-6 rounded-lg font-semibold transition duration-200 flex items-center justify-center shadow-md w-full sm:w-auto" do %>
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Deny User
+              <% end %>
+            <% end %>
+            
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+
+    <!-- Divider -->
+    <div class="border-t-2 border-gray-200 my-6"></div>
+
+    <!-- Edit/Delete -->
+    <div class="space-y-3">
+      
+      <!-- Edit Button -->
+      <%= link_to edit_admin_user_path(@user), class: "border w-full bg-blue-50 hover:bg-blue-200 text-blue-600 py-3 px-4 rounded-lg font-semibold transition duration-200 flex items-center justify-center shadow-md" do %>
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+        </svg>
+        Edit User
+      <% end %>
+
+      <!-- Delete Button -->
+      <%= link_to admin_user_path(@user), data: { turbo_method: :delete, turbo_confirm: "Delete user?" }, class: "border w-full bg-red-50 hover:bg-red-100 text-red-600 py-3 px-4 rounded-lg font-semibold transition duration-200 flex items-center justify-center shadow-md" do %>
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+        </svg>
+        Delete User
+      <% end %>
+    </div>
+
+  </div>
+</body>
