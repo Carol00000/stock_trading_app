@@ -1,19 +1,7 @@
 class UserMailer < ApplicationMailer
-  default from: 'noreply@yourdomain.com'
 
-  def welcome_email(user)
-    @user = user
-    mail(to: @user.email, subject: 'Welcome!')
-  end
-
-def confirmation_instructions(user, token = nil)
-    @user = user
-    @token = token
-    mail(
-      to: user.email,
-      subject: 'Confirm your account'
-    )
-  end
+    def confirmation_instructions(record, token, opts = {})
+    end
     
     def registration_pending(user)
         @user = user

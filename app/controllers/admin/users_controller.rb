@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
 
   def index
-    @users = User.all.order(id: :asc) #unused
+    @users = User.all.order(id: :asc)
     @approved_users = User.where(account_status: 'approved', admin: false).order(id: :asc)
     @pending_users = User.where(account_status: 'pending', admin: false).order(id: :asc)
   end
