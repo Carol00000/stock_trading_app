@@ -12,7 +12,7 @@ class User < ApplicationRecord
   private
   def set_pending_status_and_notify
     update_column(:account_status, 'pending')
-    UserMailer.registration_pending(self).deliver_now
+    #UserMailer.registration_pending(self).deliver_now
   end
   
 end
