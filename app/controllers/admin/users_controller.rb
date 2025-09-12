@@ -4,6 +4,8 @@ class Admin::UsersController < ApplicationController
     @users = User.all.order(id: :asc)
     @approved_users = User.where(account_status: 'approved', admin: false).order(id: :asc)
     @pending_users = User.where(account_status: 'pending', admin: false).order(id: :asc)
+    @denied_users = User.where(account_status: 'denied', admin: false).order(id: :asc)
+
   end
 
   def new
@@ -57,7 +59,7 @@ class Admin::UsersController < ApplicationController
 
   def deny
     @user = User.find(params[:id])
-    if @user.destroy
+    if @user.update(account_status: 'denied')
       UserMailer.account_denied(@user).deliver_now
       redirect_to admin_users_path, notice: "User has been denied."
     else

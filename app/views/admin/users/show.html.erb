@@ -69,7 +69,7 @@
             <% if @user.account_status == 'pending' %>
               <!-- Deny -->
               <%= button_to deny_admin_user_path(@user),
-                  method: :patch,
+                  method: :delete,
                   data: { turbo_confirm: "Are you sure you want to reject this user?" },
                   class: "border bg-red-50 hover:bg-red-100 text-red-600 py-3 px-6 rounded-lg font-semibold transition duration-200 flex items-center justify-center shadow-md w-full sm:w-auto" do %>
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
