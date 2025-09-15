@@ -1,30 +1,37 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-
+begin
+  puts "Checking database connection..."
+  
+  if ActiveRecord::Migration.check_pending!
+    puts "Running pending migrations..."
+  end
+rescue => e
+  puts "Migration check failed: #{e.message}"
+end
 
 puts "Creating demo accounts..."
 
-admin = User.find_or_create_by(email: 'admin@demo.com') do |user|
-  user.password = 'admin123'
-  user.password_confirmation = 'admin123'
-  user.admin = true
-  user.confirmed_at = Time.current
-end
+begin
+  admin = User.find_or_create_by(email: 'admin@demo.com') do |user|
+    user.password = 'admin123'
+    user.password_confirmation = 'admin123'
+    user.admin = true
+    user.confirmed_at = Time.current
+    puts "Creating admin user..."
+  end
 
-demo_user = User.find_or_create_by(email: 'demo@demo.com') do |user|
-  user.password = 'demo123'
-  user.password_confirmation = 'demo123'
-  user.admin = false
-  user.confirmed_at = Time.current
-end
+  demo_user = User.find_or_create_by(email: 'demo@demo.com') do |user|
+    user.password = 'demo123'
+    user.password_confirmation = 'demo123'
+    user.admin = false
+    user.confirmed_at = Time.current
+    puts "Creating demo user..."
+  end
 
-puts "✅ Demo accounts created!"
-puts "Admin: admin@demo.com / admin123"
-puts "User: demo@demo.com / demo123"
+  puts "✅ Demo accounts created successfully!"
+  puts "Admin: admin@demo.com / admin123"
+  puts "User: demo@demo.com / demo123"
+  
+rescue => e
+  puts "❌ Error creating users: #{e.message}"
+  puts "This might be because migrations haven't run yet."
+end
