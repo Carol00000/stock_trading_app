@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_admin
     unless current_user&.admin?
-      redirect_to portfolios_show_path, alert: "Access denied. Admin privileges required."
+      redirect_to portfolios_show_path
     end
   end
 
