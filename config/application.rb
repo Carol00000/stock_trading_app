@@ -25,9 +25,9 @@ module StockTradingApp
     # config.eager_load_paths << Rails.root.join("extras")
 
         config.after_initialize do
-      if Rails.env.production? && User.count == 0
-        Rails.application.load_seed
-      end
+      # if Rails.env.production? && User.count == 0
+      #   Rails.application.load_seed
+      # end
     end
 
   end
