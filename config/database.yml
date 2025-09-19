@@ -81,3 +81,7 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+  pool: 10
+  checkout_timeout: 5
+  reconnect: true
+  retry_attempts: 30
