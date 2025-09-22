@@ -27,8 +27,8 @@
                 <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Type</th>
                 <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Buy/Sell</th>
                 <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Action/Company</th>
-                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Shares</th>
-                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Price</th>
+                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Shares/Target</th>
+                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Price/Description</th>
                 <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Date</th>
               </tr>
             </thead>
@@ -66,7 +66,7 @@
                   </td>
                   <td class="py-4 px-4 font-bold text-gray-900">
                     <% if transaction.admin_action? %>
-                      <%= transaction.target_user&.email || 'N/A' %>
+                      <%= transaction.target_user&.email || 'System' %>
                     <% else %>
                       <%= transaction.shares %> shares
                     <% end %>
