@@ -24,11 +24,10 @@
               <tr>
                 <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Transaction ID</th>
                 <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">User</th>
-                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Type</th>
-                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Buy/Sell</th>
-                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Action/Company</th>
-                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Shares/Target</th>
-                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Price/Description</th>
+                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Action</th>
+                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Company</th>
+                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Shares</th>
+                <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Price</th>
                 <th class="py-3 px-4 uppercase text-xs font-medium text-gray-500">Date</th>
               </tr>
             </thead>
@@ -38,46 +37,13 @@
                   <td class="py-4 px-4 font-medium text-gray-900"><%= transaction.id %></td>
                   <td class="py-4 px-4 font-medium text-gray-900"><%= transaction.user.email %></td>
                   <td class="py-4 px-4">
-                    <% if transaction.admin_action? %>
-                      <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">
-                        Admin Action
-                      </span>
-                    <% else %>
-                      <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                        Stock Trade
-                      </span>
-                    <% end %>
+                    <span class="px-2 py-1 text-xs font-medium rounded-full <%= transaction.action_type.downcase == 'buy' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+                      <%= transaction.action_type.capitalize %>
+                    </span>
                   </td>
-                  <td class="py-4 px-4">
-                    <% if transaction.admin_action? %>
-                      <span class="text-gray-500">N/A</span>
-                    <% else %>
-                      <span class="px-2 py-1 text-xs font-medium rounded-full <%= transaction.action_type.downcase == 'buy' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
-                        <%= transaction.action_type.capitalize %>
-                      </span>
-                    <% end %>
-                  </td>
-                  <td class="py-4 px-4 font-medium text-gray-900">
-                    <% if transaction.admin_action? %>
-                      <%= transaction.action_display_name %>
-                    <% else %>
-                      <%= transaction.company_name %>
-                    <% end %>
-                  </td>
-                  <td class="py-4 px-4 font-bold text-gray-900">
-                    <% if transaction.admin_action? %>
-                      <%= transaction.target_user&.email || 'System' %>
-                    <% else %>
-                      <%= transaction.shares %> shares
-                    <% end %>
-                  </td>
-                  <td class="py-4 px-4 font-bold text-blue-600">
-                    <% if transaction.admin_action? %>
-                      <%= transaction.description %>
-                    <% else %>
-                      $<%= number_with_delimiter(transaction.total_price) %>
-                    <% end %>
-                  </td>
+                  <td class="py-4 px-4 font-medium text-gray-900"><%= transaction.company_name %></td>
+                  <td class="py-4 px-4 font-bold text-gray-900"><%= transaction.shares %> shares</td>
+                  <td class="py-4 px-4 font-bold text-blue-600">$<%= number_with_delimiter(transaction.total_price) %></td>
                   <td class="py-4 px-4 text-gray-500"><%= transaction.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
                 </tr>
               <% end %>
@@ -93,7 +59,7 @@
             </svg>
           </div>
           <h3 class="text-sm font-medium text-gray-900 mb-1">No transactions yet</h3>
-          <p class="text-sm text-gray-500">Transaction history will appear here once admin actions or trading begins.</p>
+          <p class="text-sm text-gray-500">Transaction history will appear here once trading begins.</p>
         </div>
       <% end %>
     </div>
