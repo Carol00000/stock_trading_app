@@ -14,4 +14,5 @@ class Transaction < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["company_name", "action_type"]
   end
+  
 end
