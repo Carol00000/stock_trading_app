@@ -1,64 +1,147 @@
-<div class="m-0 p-0 min-h-screen bg-gray-50 py-8">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mx-auto">
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+  <div class="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+    
+    <!-- Admin Content -->
+    <% if current_user.admin? %>
+      <div class="p-8">
+        
+        <!-- Dashboard Header with Logout Button -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-900">Admin Dashboard</h2>
+                <p class="text-gray-600 text-sm">Access administrative tools and manage your platform</p>
+              </div>
+            </div>
+            
+            <!-- Logout Button aligned with Admin Dashboard -->
+            <% if user_signed_in? %>
+              <%= button_to destroy_user_session_path, method: :delete,
+                  class: "px-5 py-2.5 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition-all shadow-sm hover:shadow",
+                  style: "cursor: pointer;" do %>
+                Logout
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      
+        <!-- Admin Tools Grid -->
+        <div class="mb-8">
+          <div class="space-y-4">
+            
+            <!-- User Trading History -->
+            <%= link_to admin_transactions_path,
+                class: "block p-6 hover:bg-blue-50 transition-colors group" do %>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      User Trading History
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-0.5">View and manage all platform transactions</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 text-blue-600 font-semibold">
+                  <span class="text-sm">View Details</span>
+                  <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </div>
+              </div>
+            <% end %>
+
+            <!-- Users -->
+            <%= link_to admin_users_path,
+                class: "block p-6 hover:bg-blue-50 transition-colors group" do %>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      Users
+                    </h3>
+                    <p class="text-gray-600 text-sm mt-0.5">Manage user accounts and permissions</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 text-blue-600 font-semibold">
+                  <span class="text-sm">Manage Users</span>
+                  <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
 
 
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 mx-4 sm:mx-6 lg:mx-8 mt-4 sm:mt-6 lg:mt-8 p-8 sm:p-10 lg:p-12 bg-white rounded-lg border-2 text-sm font-medium  ">
-
-      <!-- Stock Trading + Welcome -->
-      <div class="mb-4 md:mb-0 ">
-        <h1 class="text-2xl font-bold text-black-900 sm:text-3xl">
-          Stock Trading App
-        </h1>
-        <p class="mt-1 text-sm text-black-500">
-          Welcome <%= current_user.first_name.upcase %>
-        </p>
+<!-- Featured Stocks Section - Horizontal Layout -->
+<div class="bg-gray-50 rounded-xl p-8 border border-gray-200">
+  <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Featured Stocks</h3>
+  
+    <!-- Stock Cards Container - Flex Row -->
+    <div class="flex gap-6 flex-1">
+      <!-- Apple -->
+      <div class="flex-1 bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+        <h4 class="font-bold text-gray-900 text-base mb-1">Apple Inc.</h4>
+        <p class="text-sm text-gray-600 mb-4">(AAPL)</p>
+        <p class="text-3xl font-bold text-blue-600 mb-4">$150.25</p>
+        <div class="text-sm space-y-1">
+          <p class="text-gray-600">Volume: <span class="font-semibold text-gray-900">78.9M</span></p>
+          <p class="text-gray-600">Market Cap: <span class="font-semibold text-gray-900">2.45T</span></p>
+        </div>
       </div>
 
-      <!-- Home + Logout Buttons -->
-      <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+      <!-- Alphabet -->
+      <div class="flex-1 bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+        <h4 class="font-bold text-gray-900 text-base mb-1">Alphabet Inc.</h4>
+        <p class="text-sm text-gray-600 mb-4">(GOOGL)</p>
+        <p class="text-3xl font-bold text-blue-600 mb-4">$2750.80</p>
+        <div class="text-sm space-y-1">
+          <p class="text-gray-600">Volume: <span class="font-semibold text-gray-900">1.2M</span></p>
+          <p class="text-gray-600">Market Cap: <span class="font-semibold text-gray-900">1.84T</span></p>
+        </div>
+      </div>
 
-        <!-- Home Button -->
-        <%= button_to root_path, method: :get,
-            class: "inline-flex items-center justify-center px-4 py-2 border-2 border-black-300 rounded-md shadow-sm text-sm font-medium text-black-600 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors duration-200 w-full sm:w-auto",
-            style: "cursor: pointer;" do %>
-          <svg class="-ml-1 mr-2 h-5 w-5 text-black-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-          </svg>
-          Home
-        <% end %>
-
-        <!-- Logout Button -->
-        <% if user_signed_in? %>
-          <%= button_to destroy_user_session_path, method: :delete,
-              class: "inline-flex items-center justify-center px-4 py-2 border-2 rounded-md shadow-sm text-sm font-medium bg-red-500 hover:bg-red-600 hover:border-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 w-full sm:w-auto",
-              style: "cursor: pointer;" do %>
-            <svg class="-ml-1 mr-2 h-5 w-5 flex-shrink-0" style="color: white;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
-            </svg>
-            Logout
-          <% end %>
-        <% end %>
-
+      <!-- Microsoft -->
+      <div class="flex-1 bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+        <h4 class="font-bold text-gray-900 text-base mb-1">Microsoft Corp.</h4>
+        <p class="text-sm text-gray-600 mb-4">(MSFT)</p>
+        <p class="text-3xl font-bold text-blue-600 mb-4">$305.15</p>
+        <div class="text-sm space-y-1">
+          <p class="text-gray-600">Volume: <span class="font-semibold text-gray-900">23.5M</span></p>
+          <p class="text-gray-600">Market Cap: <span class="font-semibold text-gray-900">2.31T</span></p>
+        </div>
       </div>
     </div>
 
 
-    <!-- Main Section/Link-->
-    <div class="rounded-lg p-8 sm:p-10 lg:p-12 mx-4 sm:mx-6 lg:mx-8 min-h-[60vh] border-2  shadow-md">
-      <div class="grid grid-cols-1 gap-6">
-        <% if current_user.admin? %>
-          <%= link_to 'Admin Transactions', admin_transactions_path, class: "block w-full p-8 bg-gray-50 rounded-lg shadow-md hover:bg-gray-100 hover:shadow-lg text-center text-black-600 font-semibold text-lg transition-all duration-200 border-2 border-black-300 rounded-md" %>
-          <%= link_to 'Users', admin_users_path, class: "block w-full p-8 bg-gray-50 rounded-lg shadow-md hover:bg-gray-100 hover:shadow-lg text-center text-black-600 font-semibold text-lg transition-all duration-200 border-2 border-black-300 rounded-md" %>
-        <% end %>
-      </div>
-    </div>
+</div>
 
+
+    <% end %>
 
     <!-- Footer -->
-    <footer class="mt-auto text-center text-lg py-4">
-      &copy; 2025 Stock Trading App. All rights reserved.
-    </footer>
+    <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
+      <p class="text-gray-500 text-sm text-center">
+        &copy; 2025 Stock Trading App. All rights reserved.
+      </p>
+    </div>
 
   </div>
 </div>
