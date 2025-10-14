@@ -19,7 +19,7 @@ Users can buy and sell stocks, track their portfolio performance, view transacti
   <img width="1901" height="911" alt="image" src="https://github.com/user-attachments/assets/16c575c9-73f2-4dad-898b-b33f4644bbf8" />
 
 
-###Admin Features
+### Admin Features
 * User management dashboard
 * Approve/deny pending user registrations
 * View all users (approved, pending, denied)
