@@ -1,126 +1,144 @@
-<div class="m-0 p-0 min-h-screen bg-green-50 py-8">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+  <div class="w-full max-w-5xl mx-auto">
 
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 mx-4 sm:mx-6 lg:mx-8 mt-4 sm:mt-6 lg:mt-8 p-6 sm:p-10 lg:p-12 bg-white rounded-2xl shadow-xl border border-green-100">
-      <div class="mb-4 md:mb-0">
-        <%= link_to portfolios_show_path, class: "inline-flex items-center px-4 py-2 text-green-700 bg-green-50 hover:bg-green-100 border-2 border-green-200 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow mb-4" do %>
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-          </svg>
-          Back to My Profile
-        <% end %>
-
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+    <!-- Header Card -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-6">
+      <div class="p-8">
+        
+        <!-- Back Button -->
+        <div class="mb-6">
+          <%= link_to portfolios_show_path, class: "inline-flex items-center px-4 py-2 text-gray-700 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow" do %>
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
             </svg>
-          </div>
-          <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">Buy & Sell Stocks</h1>
+            Back to My Profile
+          <% end %>
         </div>
-      </div>
 
-      <div class="text-left md:text-right">
-        <div class="flex items-center gap-3 md:justify-end">
-          <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+        <!-- Header with Balance -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-2xl font-bold text-gray-900">Buy & Sell Stocks</h1>
+              <p class="text-gray-600 text-sm">Trade stocks and manage your portfolio</p>
+            </div>
           </div>
-          <div>
+
+          <!-- Current Balance -->
+          <div class="text-right">
             <p class="text-sm text-gray-600 font-medium">Current Balance</p>
-            <p class="text-3xl font-bold text-green-600">$<%= current_user.balance %></p>
+            <p class="text-3xl font-bold text-blue-600">$<%= current_user.balance %></p>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- Stock Search + Details -->
-    <div class="flex flex-col lg:flex-row items-stretch justify-between gap-6 mx-4 sm:mx-6 lg:mx-8 mt-6 mb-8">
+    <!-- Trading Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-      <!-- Search Stocks -->
-      <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow-xl border border-green-100">
+      <!-- Search Stocks Card -->
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
         <div class="p-8">
-          <div class="flex items-center justify-center gap-3 mb-6">
-            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </div>
-            <p class="text-lg font-bold text-gray-900">Search Stocks</p>
+            <h3 class="text-lg font-bold text-gray-900">Search Stocks</h3>
           </div>
           
-          <%= form_with url: intraday_stocks_path, method: :get, local: true, class: "flex flex-col items-center gap-4" do |f| %>
-            <div class="w-full">
+          <%= form_with url: intraday_stocks_path, method: :get, local: true, class: "space-y-4" do |f| %>
+            <div>
               <%= f.label :symbol, "Stock Symbol", class: "block text-sm font-semibold text-gray-700 mb-2" %>
-              <%= f.text_field :symbol, value: params[:symbol], placeholder: "e.g., AAPL", class: "w-full py-3 px-4 rounded-lg font-medium border-2 border-green-200 bg-green-50 transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white" %>
+              <%= f.text_field :symbol, value: params[:symbol], placeholder: "e.g., AAPL", class: "w-full py-3 px-4 rounded-lg font-medium border border-gray-300 bg-white transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
             </div>
 
-            <div class="flex flex-col gap-3 w-full mt-2">
-              <%= f.submit "Search", class: "w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg", style: "cursor: pointer" %>
-              <%= link_to "Regenerate Stocks", intraday_stocks_path, class: "w-full bg-green-100 hover:bg-green-200 text-green-700 py-3 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow text-center border-2 border-green-200" %>
+            <div class="flex flex-col gap-3 pt-2">
+              <%= f.submit "Search", class: "w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow", style: "cursor: pointer" %>
+              <%= link_to "Regenerate Stocks", intraday_stocks_path, class: "w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-semibold transition-all duration-200 shadow-sm hover:shadow text-center border border-gray-300" %>
             </div>
           <% end %>
         </div>
       </div>
 
-      <!-- Stock Details -->
+      <!-- Stock Details Card -->
       <% if @stock_symbol %>
-        <div class="w-full lg:w-1/2 bg-white rounded-2xl shadow-xl border border-green-100">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div class="p-8">
+            
+            <!-- Stock Symbol Header -->
             <div class="text-center mb-6">
-              <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-100 rounded-lg mb-2">
-                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-lg">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path>
                 </svg>
                 <h3 class="text-xl font-bold text-gray-900"><%= @stock_symbol.upcase %></h3>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-              <div class="bg-green-50 rounded-lg p-4 border border-green-100">
-                <p class="text-xs text-green-700 font-semibold uppercase tracking-wide mb-1">Current Price</p>
-                <p class="text-2xl font-bold text-green-600">$<%= @latest_open_value %></p>
+            <!-- Stock Stats Grid -->
+            <div class="grid grid-cols-3 gap-4 mb-8">
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
+                <p class="text-xs text-blue-700 font-semibold uppercase tracking-wide mb-1">Current Price</p>
+                <p class="text-2xl font-bold text-gray-900">$<%= @latest_open_value %></p>
               </div>
-              <div class="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
-                <p class="text-xs text-emerald-700 font-semibold uppercase tracking-wide mb-1">Shares Owned</p>
+              <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-4 border border-gray-200">
+                <p class="text-xs text-gray-700 font-semibold uppercase tracking-wide mb-1">Shares Owned</p>
                 <p class="text-2xl font-bold text-gray-900"><%= @stock_shares %></p>
               </div>
-              <div class="bg-green-50 rounded-lg p-4 border border-green-100">
-                <p class="text-xs text-green-700 font-semibold uppercase tracking-wide mb-1">Total Investment</p>
-                <p class="text-2xl font-bold text-green-600">$<%= @stock_total_amount %></p>
+              <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-4 border border-emerald-200">
+                <p class="text-xs text-emerald-700 font-semibold uppercase tracking-wide mb-1">Total Investment</p>
+                <p class="text-2xl font-bold text-gray-900">$<%= @stock_total_amount %></p>
               </div>
             </div>
 
             <!-- Trading Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center gap-6 pt-6 border-t border-green-100">
+            <div class="flex flex-col sm:flex-row justify-center gap-6 pt-6 border-t border-gray-200">
+              
               <!-- Buy Shares -->
-              <%= form_with url: stocks_path, method: :post, local: true, class: "w-full sm:w-auto" do |f| %>
+              <%= form_with url: stocks_path, method: :post, local: true, class: "flex-1" do |f| %>
                 <%= f.hidden_field :symbol, value: @stock_symbol %>
                 <%= f.hidden_field :redirect_to, value: intraday_stocks_path(symbol: @stock_symbol) %>
                 <div class="flex flex-col items-center gap-3">
                   <%= f.label :shares, "Shares to Buy", class: "text-sm font-bold text-gray-700" %>
-                  <%= f.number_field :shares, min: 1, placeholder: "Enter shares", class: "w-32 px-3 py-2 text-center rounded-lg border-2 border-green-200 bg-green-50 font-semibold focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" %>
-                  <%= f.submit "Buy Shares", class: "px-6 py-2.5 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 transition-all shadow-md hover:shadow-lg", style: "cursor: pointer" %>
+                  <%= f.number_field :shares, min: 1, placeholder: "Enter shares", class: "w-32 px-3 py-2 text-center rounded-lg border border-gray-300 bg-white font-semibold focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" %>
+                  <%= f.submit "Buy Shares", class: "px-6 py-2.5 text-sm font-bold rounded-lg bg-green-600 text-white hover:bg-green-700 transition-all shadow-sm hover:shadow", style: "cursor: pointer" %>
                 </div>
               <% end %>
 
               <!-- Sell Shares -->
-              <%= form_with url: update_stock_stocks_path, method: :put, local: true, class: "w-full sm:w-auto" do |f| %>
+              <%= form_with url: update_stock_stocks_path, method: :put, local: true, class: "flex-1" do |f| %>
                 <%= f.hidden_field :symbol, value: @stock_symbol %>
                 <%= f.hidden_field :redirect_to, value: intraday_stocks_path(symbol: @stock_symbol) %>
                 <div class="flex flex-col items-center gap-3">
                   <%= f.label :subtract_shares, "Shares to Sell", class: "text-sm font-bold text-gray-700" %>
-                  <%= f.number_field :subtract_shares, min: 1, placeholder: "Enter shares", class: "w-32 px-3 py-2 text-center rounded-lg border-2 border-red-200 bg-red-50 font-semibold focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500" %>
-                  <%= f.submit "Sell Shares", class: "px-6 py-2.5 text-sm font-bold rounded-lg bg-red-500 text-white hover:bg-red-700 transition-all shadow-md hover:shadow-lg", style: "cursor: pointer" %>
+                  <%= f.number_field :subtract_shares, min: 1, placeholder: "Enter shares", class: "w-32 px-3 py-2 text-center rounded-lg border border-gray-300 bg-white font-semibold focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500" %>
+                  <%= f.submit "Sell Shares", class: "px-6 py-2.5 text-sm font-bold rounded-lg bg-red-500 text-white hover:bg-red-600 transition-all shadow-sm hover:shadow", style: "cursor: pointer" %>
                 </div>
               <% end %>
+
             </div>
           </div>
         </div>
       <% end %>
 
     </div>
+
+    <!-- Footer -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden mt-6">
+      <div class="bg-gray-50 px-8 py-4 border-t border-gray-200">
+        <p class="text-gray-500 text-sm text-center">
+          &copy; 2025 Stock Trading App. All rights reserved.
+        </p>
+      </div>
+    </div>
+
   </div>
 </div>
