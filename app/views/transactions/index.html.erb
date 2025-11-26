@@ -1,15 +1,19 @@
-<div class="min-h-screen bg-white">
-  <div class="w-full overflow-hidden">
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4">
+  <div class="w-full max-w-5xl mx-auto">
+
+    <!-- Header Card -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-6">
+      <div class="p-8">
     
-    <!-- Back Button -->
-    <div class="mb-6">
-      <%= link_to portfolios_show_path, class: "inline-flex items-center px-4 py-2 text-gray-700 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow" do %>
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Back to My Profile
-      <% end %>
-    </div>
+        <!-- Back Button -->
+        <div class="mb-6">
+          <%= link_to portfolios_show_path, class: "inline-flex items-center px-4 py-2 text-gray-700 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow" do %>
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            Back to My Profile
+          <% end %>
+        </div>
 
     <!-- Transaction History Card -->
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
