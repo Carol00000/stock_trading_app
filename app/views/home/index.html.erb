@@ -1,6 +1,5 @@
-<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4">
-  <div class="w-full max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
-    
+<div class="min-h-screen bg-white">
+  <div class="w-full overflow-hidden">    
     <!-- Admin Content -->
     <% if current_user.admin? %>
       <div class="p-8">
@@ -37,7 +36,7 @@
             
             <!-- User Trading History -->
             <%= link_to admin_transactions_path,
-                class: "block p-6 hover:bg-blue-50 transition-colors group" do %>
+                class: "block p-6 hover:bg-blue-50 transition-colors group border border-gray-200 rounded-lg" do %>
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-4">
                   <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -91,14 +90,13 @@
 
 
         <!-- Featured Stocks Section - Horizontal Layout -->
-        <div class="bg-gray-50 rounded-xl p-8 border border-gray-200">
+        <div class="bg-gray-50 rounded-lg p-8 border border-gray-200">
           <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Featured Stocks</h3>
           
             <!-- Stock Cards Container - Flex Row with Wrap -->
             <div class="flex flex-wrap justify-center gap-6">
               <!-- Apple -->
-              <div class="flex-1 min-w-[250px] max-w-[350px] bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
-                <h4 class="font-bold text-gray-900 text-base mb-1">Apple Inc.</h4>
+<div class="flex-1 min-w-[250px] max-w-[350px] bg-white border border-gray-200 rounded-lg p-6 ...">                <h4 class="font-bold text-gray-900 text-base mb-1">Apple Inc.</h4>
                 <p class="text-sm text-gray-600 mb-4">(AAPL)</p>
                 <p class="text-3xl font-bold text-blue-600 mb-4">$150.25</p>
                 <div class="text-sm space-y-1">
