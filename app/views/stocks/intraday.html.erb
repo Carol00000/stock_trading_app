@@ -31,8 +31,8 @@
 
           <!-- Current Balance -->
           <div class="text-right">
-            <p class="text-sm text-gray-600 font-medium">Current Balance</p>
-            <p class="text-3xl font-bold text-blue-600">$<%= current_user.balance %></p>
+            <p class="text-xs md:text-sm text-gray-600 font-medium">Current Balance</p>
+            <p class="text-lg md:text-3xl font-bold text-blue-600 break-words max-w-[150px] md:max-w-none">$<%= current_user.balance %></p>
           </div>
         </div>
 
@@ -95,7 +95,7 @@
               </div>
               <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-4 border border-emerald-200">
                 <p class="text-xs text-emerald-700 font-semibold uppercase tracking-wide mb-1">Total Investment</p>
-                <p class="text-2xl font-bold text-gray-900">$<%= @stock_total_amount %></p>
+                <p class="text-lg md:text-2xl font-bold text-gray-900 break-words">$<%= @stock_total_amount %></p>
               </div>
             </div>
 
