@@ -5,6 +5,8 @@ Built with user authentication, portfolio management, and transaction tracking f
 ## OVERVIEW
 This application enables users to trade stocks in a simulated environment using real market data.
 Users can buy and sell stocks, track their portfolio performance, view transaction history, and manage their balance — all while learning about stock trading in a risk-free environment.
+<img width="1913" height="907" alt="image" src="https://github.com/user-attachments/assets/066e0c52-375d-419c-b33c-98d8d39f52c1" />
+
 
 ## FEATURES
 ### User Features
@@ -16,7 +18,7 @@ Users can buy and sell stocks, track their portfolio performance, view transacti
 * Responsive design with Tailwind CSS
 * Balance management system
 
-  <img width="1901" height="911" alt="image" src="https://github.com/user-attachments/assets/16c575c9-73f2-4dad-898b-b33f4644bbf8" />
+<img width="1914" height="904" alt="image" src="https://github.com/user-attachments/assets/010fe4b4-9c6e-48ad-a916-1dba4503587c" />
 
 
 ### Admin Features
@@ -28,7 +30,7 @@ Users can buy and sell stocks, track their portfolio performance, view transacti
 * User account status management
 * Separate admin transaction page
   
-  <img width="1912" height="906" alt="image" src="https://github.com/user-attachments/assets/700ee343-4c28-4cf5-b5f7-327f5874167e" />
+<img width="1913" height="909" alt="image" src="https://github.com/user-attachments/assets/6ddc6989-d4cc-4b13-9251-279c180efafb" />
 
 
 ## LIVE DEMO
